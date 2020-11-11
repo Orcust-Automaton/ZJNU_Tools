@@ -1,50 +1,4 @@
 #coding=utf-8
-'''
-请求模拟卷ID
-GET /exam/getExamReport?userID=7849865&examID=33716 HTTP/1.1
-Host: apps.ulearning.cn
-Connection: close
-Accept: application/json, text/plain, */*
-Origin: https://mexam.ulearning.cn
-Authorization: E9A9A9B7BB1D53FCDFE034CDE5B42A9E
-User-Agent: Mozilla/5.0 (Linux; Android 10; GM1910 Build/QKQ1.190716.003; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045409 Mobile Safari/537.36 umoocApp umoocApp -cn
-Sec-Fetch-Mode: cors
-X-Requested-With: cn.ulearning.yxy
-Sec-Fetch-Site: same-site
-Referer: https://mexam.ulearning.cn/
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
-
-请求试卷
-GET /exam/getPaperForStudent?paperID=505335&examuserId=7854452 HTTP/1.1
-Host: apps.ulearning.cn
-Connection: close
-Accept: application/json, text/plain, */*
-Origin: https://mexam.ulearning.cn
-Authorization: EBFCC08CE7CC9ACB7B3949CA5EB3A14B
-User-Agent: Mozilla/5.0 (Linux; Android 10; GM1910 Build/QKQ1.190716.003; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045409 Mobile Safari/537.36 umoocApp umoocApp -cn
-Sec-Fetch-Mode: cors
-X-Requested-With: cn.ulearning.yxy
-Sec-Fetch-Site: same-site
-Referer: https://mexam.ulearning.cn/
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
-
-请求答案
-GET /exam/getPaperAnswer?paperID=505361&userId=7849865 HTTP/1.1
-Host: apps.ulearning.cn
-Connection: close
-Accept: application/json, text/plain, */*
-Origin: https://mexam.ulearning.cn
-Authorization: E9A9A9B7BB1D53FCDFE034CDE5B42A9E
-User-Agent: Mozilla/5.0 (Linux; Android 10; GM1910 Build/QKQ1.190716.003; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045409 Mobile Safari/537.36 umoocApp umoocApp -cn
-Sec-Fetch-Mode: cors
-X-Requested-With: cn.ulearning.yxy
-Sec-Fetch-Site: same-site
-Referer: https://mexam.ulearning.cn/
-Accept-Encoding: gzip, deflate
-Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
-'''
 import requests, pymysql, pprint
 
 def get_exam_ids(usr, exid, cookie):
@@ -152,6 +106,12 @@ def db_insert(examanswer, examtitle):
                 tmp += "C" + j[0][2][2]['title'][:10]
             if 'D' in j[1]:
                 tmp += "D" + j[0][2][3]['title'][:10]
+            if 'E' in j[1]:
+                tmp += "E" + j[0][2][4]['title'][:10]
+            if 'F' in j[1]:
+                tmp += "F" + j[0][2][5]['title'][:10]
+            if 'G' in j[1]:
+                tmp += "G" + j[0][2][6]['title'][:10]
             sql = "insert into answers values (%s, '%s', '%s');" % (i, j[0][1], tmp)
         else:
             sql = "insert into answers values (%s, '%s', '%s');" % (i, j[0][1], j[1])
@@ -165,7 +125,7 @@ def db_insert(examanswer, examtitle):
 if __name__ == '__main__':
     usrid = 7849865
     examid = 33716
-    cookie = 'AB5D668E79207EA58DF63304D3F6C4EC'
+    cookie = '4AD8CA2F98DC8ECF6214E6F93C54E262'
     
     examlist = get_exam_ids(usrid, examid, cookie)
     #print examlist
