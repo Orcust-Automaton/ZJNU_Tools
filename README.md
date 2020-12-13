@@ -1,5 +1,5 @@
 # ZJNU_Tools
-A Repo for bypass ZJNU services.
+A repo for better zjnu lives.
 
 # Architecture
 
